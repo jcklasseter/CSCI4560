@@ -67,6 +67,10 @@ def populateTables(cursor):
     # "INSERT INTO SHIPMENT VALUES('s4', 'p4', 300, 0.006)"
     # "INSERT INTO SHIPMENT VALUES('s4', 'p5', 400, 0.003)"
 
+def showTables(cursor):
+    cursor.execute("SELECT Sname FROM SUPPLIER")
+    print("Results:", ", ".join([x[0] for x in cursor]))
+
 # Run the main program
 if __name__ == "__main__":
     mydb = mysql.connector.connect(
@@ -81,7 +85,7 @@ if __name__ == "__main__":
     # First, setup the tables
     createTables(cursor)
     populateTables(cursor)
-
+    showTables(cursor)
 
 
 

@@ -107,6 +107,8 @@ if __name__ == "__main__":
         cmd = "INSERT INTO SHIPMENT VALUES('s2', 'p3', 200, 0.006)"
         cursor.execute(cmd)
         print("Successfully executed command")
+        cursor.execute(cmd)
+        print("Successfully executed command again")
     except Exception as e:
         print("Did not successfully execute command")
         print(e)

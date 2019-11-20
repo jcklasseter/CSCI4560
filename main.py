@@ -93,7 +93,7 @@ if __name__ == "__main__":
     cursor = mydb.cursor(buffered=True)
 
     # First, setup the tables
-    clearTables(cursor)
+    clearTables(cursor, "SHIPMENT")
     createTables(cursor)
     populateTables(cursor)
     showTables(cursor)

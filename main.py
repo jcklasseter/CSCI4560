@@ -45,34 +45,41 @@ def populateTables(cursor):
     cursor.execute("INSERT INTO SUPPLIER VALUES('s4', 'Clark', 20, 'London')")
     cursor.execute("INSERT INTO SUPPLIER VALUES('s5', 'Adams', 30, NULL)")
 
-    # "INSERT INTO PART VALUES('p1', 'Nut', 'Red', 12, 'London')"
-    # "INSERT INTO PART VALUES('p2', 'Bolt', 'Green', 17, 'Paris')"
-    # "INSERT INTO PART VALUES('p3', 'Screw', NULL, 17, 'Rome')"
-    # "INSERT INTO PART VALUES('p4', 'Screw', 'Red', 14, 'London')"
-    # "INSERT INTO PART VALUES('p5', 'Cam', 'Blue', 12, 'Paris')"
-    # "INSERT INTO PART VALUES('p6', 'Cog', 'Red', 19, 'London')"
-    #
-    # "INSERT INTO SHIPMENT VALUES('s1', 'p1', 300, 0.005)"
-    # "INSERT INTO SHIPMENT VALUES('s1', 'p2', 200, 0.009)"
-    # "INSERT INTO SHIPMENT VALUES('s1', 'p3', 400, 0.004)"
-    # "INSERT INTO SHIPMENT VALUES('s1', 'p4', 200, 0.009)"
-    # "INSERT INTO SHIPMENT VALUES('s1', 'p5', 100, 0.01)"
-    # "INSERT INTO SHIPMENT VALUES('s1', 'p6', 100, 0.01)"
-    # "INSERT INTO SHIPMENT VALUES('s2', 'p1', 300, 0.006)"
-    # "INSERT INTO SHIPMENT VALUES('s2', 'p2', 400, 0.004)"
-    # "INSERT INTO SHIPMENT VALUES('s3', 'p2', 200, 0.009)"
-    # "INSERT INTO SHIPMENT VALUES('s3', 'p3', 200, NULL)"
-    # "INSERT INTO SHIPMENT VALUES('s4', 'p2', 200, 0.006)"
-    # "INSERT INTO SHIPMENT VALUES('s4', 'p3', NULL, NULL)"
-    # "INSERT INTO SHIPMENT VALUES('s4', 'p4', 300, 0.006)"
-    # "INSERT INTO SHIPMENT VALUES('s4', 'p5', 400, 0.003)"
+    cursor.execute("INSERT INTO PART VALUES('p1', 'Nut', 'Red', 12, 'London')")
+    cursor.execute("INSERT INTO PART VALUES('p2', 'Bolt', 'Green', 17, 'Paris')")
+    cursor.execute("INSERT INTO PART VALUES('p3', 'Screw', NULL, 17, 'Rome')")
+    cursor.execute("INSERT INTO PART VALUES('p4', 'Screw', 'Red', 14, 'London')")
+    cursor.execute("INSERT INTO PART VALUES('p5', 'Cam', 'Blue', 12, 'Paris')")
+    cursor.execute("INSERT INTO PART VALUES('p6', 'Cog', 'Red', 19, 'London')")
+
+    cursor.execute("INSERT INTO SHIPMENT VALUES('s1', 'p1', 300, 0.005)")
+    cursor.execute("INSERT INTO SHIPMENT VALUES('s1', 'p2', 200, 0.009)")
+    cursor.execute("INSERT INTO SHIPMENT VALUES('s1', 'p3', 400, 0.004)")
+    cursor.execute("INSERT INTO SHIPMENT VALUES('s1', 'p4', 200, 0.009)")
+    cursor.execute("INSERT INTO SHIPMENT VALUES('s1', 'p5', 100, 0.01)")
+    cursor.execute("INSERT INTO SHIPMENT VALUES('s1', 'p6', 100, 0.01)")
+    cursor.execute("INSERT INTO SHIPMENT VALUES('s2', 'p1', 300, 0.006)")
+    cursor.execute("INSERT INTO SHIPMENT VALUES('s2', 'p2', 400, 0.004)")
+    cursor.execute("INSERT INTO SHIPMENT VALUES('s3', 'p2', 200, 0.009)")
+    cursor.execute("INSERT INTO SHIPMENT VALUES('s3', 'p3', 200, NULL)")
+    cursor.execute("INSERT INTO SHIPMENT VALUES('s4', 'p2', 200, 0.006)")
+    cursor.execute("INSERT INTO SHIPMENT VALUES('s4', 'p3', NULL, NULL)")
+    cursor.execute("INSERT INTO SHIPMENT VALUES('s4', 'p4', 300, 0.006)")
+    cursor.execute("INSERT INTO SHIPMENT VALUES('s4', 'p5', 400, 0.003)")
 
 def showTables(cursor):
     cursor.execute("SELECT Sname FROM SUPPLIER")
     print("Results:", ", ".join([x[0] for x in cursor]))
 
-def clearTables(cursor):
-    cursor.execute("DROP TABLE SUPPLIER")
+def clearTables(cursor, tableName):
+    stmt = "SHOW TABLES LIKE '" + tableName + "'"
+    cursor.execute(stmt)
+    result = cursor.fetchone()
+    if result:
+        print("Table: " + tableName + " found")
+        #cursor.execute("DROP TABLE SUPPLIER")
+    else:
+        print("No table: " + tableName + " found")
 
 # Run the main program
 if __name__ == "__main__":
@@ -86,6 +93,7 @@ if __name__ == "__main__":
     cursor = mydb.cursor(buffered=True)
 
     # First, setup the tables
+    clearTables(cursor)
     createTables(cursor)
     populateTables(cursor)
     showTables(cursor)

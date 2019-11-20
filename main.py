@@ -71,6 +71,9 @@ def showTables(cursor):
     cursor.execute("SELECT Sname FROM SUPPLIER")
     print("Results:", ", ".join([x[0] for x in cursor]))
 
+def clearTables(cursor):
+    cursor.execute("DROP TABLE SUPPLIER")
+
 # Run the main program
 if __name__ == "__main__":
     mydb = mysql.connector.connect(

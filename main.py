@@ -67,19 +67,19 @@ def populateTables(cursor):
     cursor.execute("INSERT INTO SHIPMENT VALUES('s4', 'p4', 300, 0.006)")
     cursor.execute("INSERT INTO SHIPMENT VALUES('s4', 'p5', 400, 0.003)")
 
+
 def showTables(cursor):
     cursor.execute("SELECT Sname FROM SUPPLIER")
     print("Results:", ", ".join([x[0] for x in cursor]))
+
 
 def clearTables(cursor, tableName):
     stmt = "SHOW TABLES LIKE '" + tableName + "'"
     cursor.execute(stmt)
     result = cursor.fetchone()
     if result:
-        print("Table: " + tableName + " found")
-        #cursor.execute("DROP TABLE SUPPLIER")
-    else:
-        print("No table: " + tableName + " found")
+        cursor.execute("DROP TABLE " + tableName)
+
 
 # Run the main program
 if __name__ == "__main__":
@@ -94,10 +94,20 @@ if __name__ == "__main__":
 
     # First, setup the tables
     clearTables(cursor, "SHIPMENT")
+    clearTables(cursor, "PART")
+    clearTables(cursor, "SUPPLIER")
     createTables(cursor)
     populateTables(cursor)
-    showTables(cursor)
+    #showTables(cursor)
 
+    # Now show the specific manipulations required
 
-
+    # 1 Insert new tuple and report success or fail
+    try:
+        cmd = "INSERT INTO SHIPMENT VALUES('s2', 'p3', 200, 0.006)"
+        cursor.execute(cmd)
+        print("Successfully executed command")
+    except Exception as e:
+        print("Did not successfully execute command")
+        print(e)
 

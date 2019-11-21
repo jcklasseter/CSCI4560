@@ -69,7 +69,7 @@ def populateTables(cursor):
 
 
 def showTables(cursor, table):
-    cursor.execute("SELECT Sname FROM " + table)
+    cursor.execute("SELECT * FROM " + table)
     print("Results:", "\n".join([", ".join(x) for x in cursor]))
 
 

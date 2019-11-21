@@ -157,7 +157,8 @@ if __name__ == "__main__":
         try:
             cursor.execute(cmd)
             print("Successfully executed: " + cmd)
-            print("Results:\n", "\n".join([", ".join([str(i) for i in x]) for x in cursor]))
+            print("Information about the supplier that ship that part: ")
+            print("\n".join([", ".join([str(i) for i in x]) for x in cursor]))
         except Exception as e:
             print("Did not successfully execute: " + cmd)
 

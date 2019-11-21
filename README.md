@@ -12,6 +12,8 @@ Due: Nov. 25 2019
 
 **Setup instructions**: 
 
+Sources at: https://github.com/jcklasseter/CSCI4560
+
 Executed in an Ubuntu 18.04 VM
 
 Developed on OSX with PyCharm, but it's not needed for execution

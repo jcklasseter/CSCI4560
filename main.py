@@ -70,7 +70,7 @@ def populateTables(cursor):
 
 def showTables(cursor, table):
     cursor.execute("SELECT * FROM " + table)
-    print("Results:", "\n".join([", ".join(x) for x in cursor]))
+    print("Results:", "\n".join([", ".join([str(i) for i in x]) for x in cursor]))
 
 
 def clearTables(cursor, tableName):
@@ -117,10 +117,12 @@ if __name__ == "__main__":
         print("Did not successfully execute: " + cmd)
 
     # 3 Increase the status of each supplier by 10%
-    cursor.execute("UPDATE SUPPLIER SET Status = Status * 1.1")
-
-
-
+    try:
+        cmd = "UPDATE SUPPLIER SET Status = Status * 1.1"
+        cursor.execute(cmd)
+        print("Successfully executed: " + cmd)
+    except Exception as e:
+        print("Did not successfully execute: " + cmd)
 
     showTables(cursor, "SUPPLIER")
 

@@ -3,6 +3,7 @@
 # Due: Nov. 25 2019
 
 # Description: Manipulate the SUPPLIER-PART-SHIPMENT database programmatically
+# Video of execution: https://www.cs.mtsu.edu/~c8070423/CSCI4560_P5.mp4
 
 import mysql.connector
 

@@ -153,7 +153,7 @@ if __name__ == "__main__":
     if resp not in parts:
         print("Unknown part # entered")
     else:
-        cmd = "SELECT * FROM SUPPLIER WHERE Sno IN (SELECT Sno FROM SHIPMENT WHERE Pno = " + resp + ")"
+        cmd = "SELECT * FROM SUPPLIER WHERE Sno IN (SELECT Sno FROM SHIPMENT WHERE Pno = '" + resp + "')"
         try:
             cursor.execute(cmd)
             print("Successfully executed: " + cmd)

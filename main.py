@@ -70,7 +70,8 @@ def populateTables(cursor):
 
 def showTable(cursor, table):
     cursor.execute("SELECT * FROM " + table)
-    print("Results:\n", "\n".join([", ".join([str(i) for i in x]) for x in cursor]))
+    print("Results:")
+    print("\n".join([", ".join([str(i) for i in x]) for x in cursor]))
 
 
 def clearTables(cursor, tableName):
@@ -157,7 +158,7 @@ if __name__ == "__main__":
         try:
             cursor.execute(cmd)
             print("Successfully executed: " + cmd)
-            print("Information about the supplier that ship that part: ")
+            print("Information about the supplier(s) that ship that part: ")
             print("\n".join([", ".join([str(i) for i in x]) for x in cursor]))
         except Exception as e:
             print("Did not successfully execute: " + cmd)

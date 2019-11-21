@@ -68,7 +68,7 @@ def populateTables(cursor):
     cursor.execute("INSERT INTO SHIPMENT VALUES('s4', 'p5', 400, 0.003)")
 
 
-def showTables(cursor, table):
+def showTable(cursor, table):
     cursor.execute("SELECT * FROM " + table)
     print("Results:", "\n".join([", ".join([str(i) for i in x]) for x in cursor]))
 
@@ -79,6 +79,14 @@ def clearTables(cursor, tableName):
     result = cursor.fetchone()
     if result:
         cursor.execute("DROP TABLE " + tableName)
+
+
+def getTuples(cursor, table, name):
+    stmt = "SELECT " + name + " FROM " + table
+    cursor.execute(stmt)
+    res = cursor.fetchAll()
+    if res:
+        print(res)
 
 
 # Run the main program
@@ -101,6 +109,7 @@ if __name__ == "__main__":
 
     # Now show the specific manipulations required
     # 1 Insert new tuple and report success or fail
+    print("\n#1\n")
     try:
         cmd = "INSERT INTO SHIPMENT VALUES('s2', 'p3', 200, 0.006)"
         cursor.execute(cmd)
@@ -109,6 +118,7 @@ if __name__ == "__main__":
         print("Did not successfully execute: " + cmd)
 
     # 2 Insert new tuple and report success or fail
+    print("\n#2\n")
     try:
         cmd = "INSERT INTO SHIPMENT VALUES('s4', 'p2', 100, 0.005)"
         cursor.execute(cmd)
@@ -117,6 +127,7 @@ if __name__ == "__main__":
         print("Did not successfully execute: " + cmd)
 
     # 3 Increase the status of each supplier by 10%
+    print("\n#3\n")
     try:
         cmd = "UPDATE SUPPLIER SET Status = Status * 1.1"
         cursor.execute(cmd)
@@ -124,11 +135,15 @@ if __name__ == "__main__":
     except Exception as e:
         print("Did not successfully execute: " + cmd)
 
-    showTables(cursor, "SUPPLIER")
+    # 4 Show the supplier table
+    print("\n#4\n")
+    showTable(cursor, "SUPPLIER")
 
-
-
-
-
+    # 5 Prompt user fo input part #
+    parts = getTuples(cursor, "PART", "Pno")
+    print("\n#5\n")
+    print("Please enter a part # from below for more information.\nKnown part #'s: " )
+    print("\n".join(parts))
+    resp = input()
 
 

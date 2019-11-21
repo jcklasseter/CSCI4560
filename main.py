@@ -146,4 +146,9 @@ if __name__ == "__main__":
     print("\n".join(parts))
     resp = input()
 
+    if resp not in parts:
+        print("Unknown part # entered")
+    else:
+        print()
+
 

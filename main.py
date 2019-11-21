@@ -84,7 +84,7 @@ def clearTables(cursor, tableName):
 def getTuples(cursor, table, name):
     stmt = "SELECT " + name + " FROM " + table
     cursor.execute(stmt)
-    res = cursor.fetchAll()
+    res = cursor.fetchall()
     if res:
         return [x[0] for x in res]
 

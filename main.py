@@ -70,7 +70,7 @@ def populateTables(cursor):
 
 def showTable(cursor, table):
     cursor.execute("SELECT * FROM " + table)
-    print("Results:", "\n".join([", ".join([str(i) for i in x]) for x in cursor]))
+    print("Results:\n", "\n".join([", ".join([str(i) for i in x]) for x in cursor]))
 
 
 def clearTables(cursor, tableName):
@@ -86,7 +86,7 @@ def getTuples(cursor, table, name):
     cursor.execute(stmt)
     res = cursor.fetchAll()
     if res:
-        print(res)
+        return [x[0] for x in res]
 
 
 # Run the main program

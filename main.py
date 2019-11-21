@@ -68,9 +68,9 @@ def populateTables(cursor):
     cursor.execute("INSERT INTO SHIPMENT VALUES('s4', 'p5', 400, 0.003)")
 
 
-def showTables(cursor):
-    cursor.execute("SELECT Sname FROM SUPPLIER")
-    print("Results:", ", ".join([x[0] for x in cursor]))
+def showTables(cursor, table):
+    cursor.execute("SELECT Sname FROM " + table)
+    print("Results:", "\n".join([", ".join(x) for x in cursor]))
 
 
 def clearTables(cursor, tableName):
@@ -98,18 +98,35 @@ if __name__ == "__main__":
     clearTables(cursor, "SUPPLIER")
     createTables(cursor)
     populateTables(cursor)
-    #showTables(cursor)
 
     # Now show the specific manipulations required
-
     # 1 Insert new tuple and report success or fail
     try:
         cmd = "INSERT INTO SHIPMENT VALUES('s2', 'p3', 200, 0.006)"
         cursor.execute(cmd)
-        print("Successfully executed command")
-        cursor.execute(cmd)
-        print("Successfully executed command again")
+        print("Successfully executed: " + cmd)
     except Exception as e:
-        print("Did not successfully execute command")
-        print(e)
+        print("Did not successfully execute: " + cmd)
+
+    # 2 Insert new tuple and report success or fail
+    try:
+        cmd = "INSERT INTO SHIPMENT VALUES('s4', 'p2', 100, 0.005)"
+        cursor.execute(cmd)
+        print("Successfully executed: " + cmd)
+    except Exception as e:
+        print("Did not successfully execute: " + cmd)
+
+    # 3 Increase the status of each supplier by 10%
+    cursor.execute("UPDATE SUPPLIER SET Status = Status * 1.1")
+
+
+
+
+    showTables(cursor, "SUPPLIER")
+
+
+
+
+
+
 

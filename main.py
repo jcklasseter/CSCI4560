@@ -110,8 +110,8 @@ if __name__ == "__main__":
     # Now show the specific manipulations required
     # 1 Insert new tuple and report success or fail
     print("\n#1\n")
+    cmd = "INSERT INTO SHIPMENT VALUES('s2', 'p3', 200, 0.006)"
     try:
-        cmd = "INSERT INTO SHIPMENT VALUES('s2', 'p3', 200, 0.006)"
         cursor.execute(cmd)
         print("Successfully executed: " + cmd)
     except Exception as e:
@@ -119,8 +119,8 @@ if __name__ == "__main__":
 
     # 2 Insert new tuple and report success or fail
     print("\n#2\n")
+    cmd = "INSERT INTO SHIPMENT VALUES('s4', 'p2', 100, 0.005)"
     try:
-        cmd = "INSERT INTO SHIPMENT VALUES('s4', 'p2', 100, 0.005)"
         cursor.execute(cmd)
         print("Successfully executed: " + cmd)
     except Exception as e:
@@ -128,8 +128,8 @@ if __name__ == "__main__":
 
     # 3 Increase the status of each supplier by 10%
     print("\n#3\n")
+    cmd = "UPDATE SUPPLIER SET Status = Status * 1.1"
     try:
-        cmd = "UPDATE SUPPLIER SET Status = Status * 1.1"
         cursor.execute(cmd)
         print("Successfully executed: " + cmd)
     except Exception as e:
@@ -153,8 +153,8 @@ if __name__ == "__main__":
     if resp not in parts:
         print("Unknown part # entered")
     else:
+        cmd = "SELECT * FROM SUPPLIER WHERE Sno IN (SELECT Sno FROM SHIPMENT WHERE Pno = " + resp + ")"
         try:
-            cmd = "SELECT * FROM SUPPLIER WHERE Sno IN (SELECT Sno FROM SHIPMENT WHERE Pno = " +  + ")"
             cursor.execute(cmd)
             print("Successfully executed: " + cmd)
             print("Results:\n", "\n".join([", ".join([str(i) for i in x]) for x in cursor]))

@@ -108,6 +108,9 @@ if __name__ == "__main__":
     createTables(cursor)
     populateTables(cursor)
 
+    # In these try/catch, e.errno often contains debug info that will tell
+    # if the error is from a duplicate tuple or something
+
     # Now show the specific manipulations required
     # 1 Insert new tuple and report success or fail
     print("\n#1\n")

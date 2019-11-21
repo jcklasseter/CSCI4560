@@ -11,9 +11,13 @@ Due: Nov. 25 2019
 **Video of execution**: https://www.cs.mtsu.edu/~c8070423/CSCI4560_P5.mp4
 
 **Setup instructions**: 
+
 Executed in an Ubuntu 18.04 VM
-Developed with PyCharm, but it's not needed for execution
+
+Developed on OSX with PyCharm, but it's not needed for execution
+
 SQL: MySQL
+
 Python: 3.6, but 3+ should work
 
 MySQL admin obtained from: https://dev.mysql.com/downloads/mysql/
@@ -29,3 +33,5 @@ Created database named "CSCI4560"
 `sudo apt install ./mysql-connector-python-py3_8.0.18-1ubuntu18.04_all.deb`
 
 All other python sql connectors had to be pip uninstalled before correct connection.
+
+To run (see video): `python3.6 main.py`

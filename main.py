@@ -146,9 +146,19 @@ if __name__ == "__main__":
     print("\n".join(parts))
     resp = input()
 
+    # Avoid SQL injection vulnerability by only allowing explicitly known part #'s
+    # Could simple check that no ';' exists so they can't start their own query,
+    # but maybe some real part # will have that
+    # This method only works well when there is not a large # of choices
     if resp not in parts:
         print("Unknown part # entered")
     else:
-        print()
+        try:
+            cmd = "SELECT * FROM SUPPLIER WHERE Sno IN (SELECT Sno FROM SHIPMENT WHERE Pno = " +  + ")"
+            cursor.execute(cmd)
+            print("Successfully executed: " + cmd)
+            print("Results:\n", "\n".join([", ".join([str(i) for i in x]) for x in cursor]))
+        except Exception as e:
+            print("Did not successfully execute: " + cmd)
 
 
